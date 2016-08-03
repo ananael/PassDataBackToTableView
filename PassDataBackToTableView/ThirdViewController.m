@@ -58,6 +58,11 @@
 
 - (IBAction)backTapped:(id)sender
 {
+    if ((self.selectedRow + 1) > [[NSUserDefaults standardUserDefaults]integerForKey:@"unlockedLevel"])
+    {
+        [[NSUserDefaults standardUserDefaults]setInteger:self.selectedRow + 1 forKey:@"unlockedLevel"];
+    }
+    
     [self performSegueWithIdentifier:@"unwindThirdVC" sender:self];
 }
 

@@ -10,4 +10,8 @@
 
 @interface FirstVCTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIView *cellView;
+@property (weak, nonatomic) IBOutlet UILabel *levelLabel;
+
+
 @end

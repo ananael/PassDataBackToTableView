@@ -30,7 +30,7 @@
     self.heroes = @[@"Cyborg", @"Flash", @"Jubilee", @"Storm", @"Manhunter", @"Falcon", @"Speedy", @"Guardian", @"Bouncing Boy", @"Captain Britain"];
     
     //Experiment: switch-case uses the selected row value to execute a condition.
-    //Using the elipses tells the case to use the numbers "to ... from" inclusively, so 0 ... 3 is the same as 0, 1, 2, and 3.
+    //Using the elipses tells the case to use the numbers "from ... to" inclusively, so "0 ... 3" is the same as 0, 1, 2, and 3.
     switch (self.selectedRow)
     {
         case 0 ... 3:
@@ -61,6 +61,11 @@
 
 - (IBAction)backTapped:(id)sender
 {
+    if ((self.selectedRow + 1) > [[NSUserDefaults standardUserDefaults]integerForKey:@"unlockedLevel"])
+    {
+        [[NSUserDefaults standardUserDefaults]setInteger:self.selectedRow + 1 forKey:@"unlockedLevel"];
+    }
+    
     [self performSegueWithIdentifier:@"unwindSecondVC" sender:self];
 }
 

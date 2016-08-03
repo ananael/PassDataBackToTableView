@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D21AB1CC1D5113CE00622C9A /* test background.png in Resources */ = {isa = PBXBuildFile; fileRef = D21AB1CB1D5113CE00622C9A /* test background.png */; };
 		D22EE93F1D49326800C21BB4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D22EE93E1D49326800C21BB4 /* main.m */; };
 		D22EE9421D49326800C21BB4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D22EE9411D49326800C21BB4 /* AppDelegate.m */; };
 		D22EE9481D49326800C21BB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D22EE9461D49326800C21BB4 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D21AB1CB1D5113CE00622C9A /* test background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test background.png"; sourceTree = "<group>"; };
 		D22EE93A1D49326800C21BB4 /* PassDataBackToTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassDataBackToTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D22EE93E1D49326800C21BB4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D22EE9401D49326800C21BB4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				D22EE9771D49334800C21BB4 /* ThirdViewController.m */,
 				D22EE9461D49326800C21BB4 /* Main.storyboard */,
 				D22EE9491D49326800C21BB4 /* Assets.xcassets */,
+				D21AB1CB1D5113CE00622C9A /* test background.png */,
 				D22EE94B1D49326800C21BB4 /* LaunchScreen.storyboard */,
 				D22EE94E1D49326800C21BB4 /* Info.plist */,
 				D22EE93D1D49326800C21BB4 /* Supporting Files */,
@@ -260,6 +263,7 @@
 			files = (
 				D22EE94D1D49326800C21BB4 /* LaunchScreen.storyboard in Resources */,
 				D22EE94A1D49326800C21BB4 /* Assets.xcassets in Resources */,
+				D21AB1CC1D5113CE00622C9A /* test background.png in Resources */,
 				D22EE9481D49326800C21BB4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

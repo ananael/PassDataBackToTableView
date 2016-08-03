@@ -14,8 +14,10 @@
 @interface FirstViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIImageView *backView;
 @property NSMutableArray *fruits;
 @property NSMutableArray *levelScores;
+@property NSInteger unlockValue;
 
 @end
 
@@ -27,6 +29,14 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    self.tableView.backgroundColor = [UIColor clearColor];
+    
+    //Removes unused cells from tableView.
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    
+    //self.unlockValue = 0;
+    [[NSUserDefaults standardUserDefaults]setInteger:0 forKey:@"unlockedLevel"];
     
     self.fruits = [NSMutableArray arrayWithObjects:@"apple", @"orange", @"banana", @"lime", @"prune", @"lemon", @"pear", @"cantelope", @"blueberry", @"grape", nil];
     
@@ -47,6 +57,42 @@
 {
     [super viewWillAppear:YES];
     [self.tableView reloadData];
+}
+
+-(UIColor*)colorWithHexString:(NSString*)hex alpha:(CGFloat)alpha
+{
+    NSString *cString = [[hex stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
+    
+    // String should be 6 or 8 characters
+    if ([cString length] < 6) return [UIColor grayColor];
+    
+    // strip 0X if it appears
+    if ([cString hasPrefix:@"0X"]) cString = [cString substringFromIndex:2];
+    
+    if ([cString length] != 6) return  [UIColor grayColor];
+    
+    // Separate into r, g, b substrings
+    NSRange range;
+    range.location = 0;
+    range.length = 2;
+    NSString *rString = [cString substringWithRange:range];
+    
+    range.location = 2;
+    NSString *gString = [cString substringWithRange:range];
+    
+    range.location = 4;
+    NSString *bString = [cString substringWithRange:range];
+    
+    // Scan values
+    unsigned int r, g, b;
+    [[NSScanner scannerWithString:rString] scanHexInt:&r];
+    [[NSScanner scannerWithString:gString] scanHexInt:&g];
+    [[NSScanner scannerWithString:bString] scanHexInt:&b];
+    
+    return [UIColor colorWithRed:((float) r / 255.0f)
+                           green:((float) g / 255.0f)
+                            blue:((float) b / 255.0f)
+                           alpha:alpha];
 }
 
 #pragma mark - Table view data source
@@ -70,7 +116,19 @@
  
  // Configure the cell...
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", self.levelScores[indexPath.row]];
+    cell.backgroundColor = [UIColor clearColor];
+    cell.cellView.backgroundColor = [self colorWithHexString:@"FFFFFF" alpha:0.5];
+    cell.levelLabel.text = [NSString stringWithFormat:@"%@", self.levelScores[indexPath.row]];
+    
+    //Makes the cell nonresponsive until the unlockValue changes.
+    //The userDefault value is initially set at "0" in viewDidLoad, so that the first cell is enabled.
+    //The userDefault value is increased in new VC.
+    cell.userInteractionEnabled = NO;
+    
+    if (indexPath.row <= [[NSUserDefaults standardUserDefaults]integerForKey:@"unlockedLevel"])
+    {
+        cell.userInteractionEnabled = YES;
+    }
  
  return cell;
  }
@@ -141,7 +199,6 @@
         {
             [self.levelScores replaceObjectAtIndex:thirdVC.selectedRow withObject:thirdVC.score];
         }
-        
     }
     
 }
