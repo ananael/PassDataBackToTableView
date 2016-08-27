@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 
 @property NSArray *heroes;
+@property NSMutableArray *stuffArray;
 
 - (IBAction)chooseTapped:(id)sender;
 - (IBAction)backTapped:(id)sender;
@@ -65,6 +66,8 @@
     {
         [[NSUserDefaults standardUserDefaults]setInteger:self.selectedRow + 1 forKey:@"unlockedLevel"];
     }
+    
+    [[NSUserDefaults standardUserDefaults]synchronize];
     
     [self performSegueWithIdentifier:@"unwindSecondVC" sender:self];
 }

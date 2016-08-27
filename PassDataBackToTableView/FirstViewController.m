@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *backView;
 @property NSMutableArray *fruits;
+@property NSMutableArray *openingScores;
 @property NSMutableArray *levelScores;
 @property NSInteger unlockValue;
 
@@ -40,7 +41,7 @@
     
     self.fruits = [NSMutableArray arrayWithObjects:@"apple", @"orange", @"banana", @"lime", @"prune", @"lemon", @"pear", @"cantelope", @"blueberry", @"grape", nil];
     
-    self.levelScores = [NSMutableArray arrayWithObjects:@0, @0, @0, @0, @0, @0, @0, @0, @0, @0, nil];
+    self.openingScores = [NSMutableArray arrayWithObjects:@0, @0, @0, @0, @0, @0, @0, @0, @0, @0, nil];
     
     
     
@@ -106,7 +107,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     // Return the number of rows in the section.
-    return [self.levelScores count];
+    return [self.openingScores count];
 }
 
 
@@ -118,7 +119,15 @@
     
     cell.backgroundColor = [UIColor clearColor];
     cell.cellView.backgroundColor = [self colorWithHexString:@"FFFFFF" alpha:0.5];
-    cell.levelLabel.text = [NSString stringWithFormat:@"%@", self.levelScores[indexPath.row]];
+    cell.levelLabel.text = [NSString stringWithFormat:@"%@", self.openingScores[indexPath.row]];
+    
+//    if (self.levelScores == nil)
+//    {
+//        cell.levelLabel.text = [NSString stringWithFormat:@"%@", self.openingScores[indexPath.row]];
+//    } else
+//    {
+//        cell.levelLabel.text = [NSString stringWithFormat:@"%@", self.levelScores[indexPath.row]];
+//    }
     
     //Makes the cell nonresponsive until the unlockValue changes.
     //The userDefault value is initially set at "0" in viewDidLoad, so that the first cell is enabled.
@@ -186,7 +195,7 @@
         
         NSLog(@"Number = %ld\nHero = %@", (long)secondVC.selectedRow, secondVC.hero);
         
-        [self.levelScores replaceObjectAtIndex:secondVC.selectedRow withObject:secondVC.hero];
+        [self.openingScores replaceObjectAtIndex:secondVC.selectedRow withObject:secondVC.hero];
         
     } else if ([unwindSegue.identifier isEqualToString:@"unwindThirdVC"])
     {
@@ -195,9 +204,9 @@
         NSLog(@"Number = %ld\nScore = %@", (long)thirdVC.selectedRow, thirdVC.score);
         
         //This allows me to change the player's level score ONLY if the new value is higher than the old value.
-        if (thirdVC.score > [self.levelScores objectAtIndex:thirdVC.selectedRow])
+        if (thirdVC.score > [self.openingScores objectAtIndex:thirdVC.selectedRow])
         {
-            [self.levelScores replaceObjectAtIndex:thirdVC.selectedRow withObject:thirdVC.score];
+            [self.openingScores replaceObjectAtIndex:thirdVC.selectedRow withObject:thirdVC.score];
         }
     }
     
